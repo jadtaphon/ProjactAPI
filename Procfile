@@ -1,1 +1,1 @@
-web: ProjactAPI
+web: bin/ProjactAPI
