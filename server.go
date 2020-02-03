@@ -9,12 +9,14 @@ import (
 )
 
 func main() {
+	port := os.Getenv("PORT")
+
 	e := echo.New()
 	e.GET("/", func(c echo.Context) error {
 		return c.String(http.StatusOK, "Hello, World!")
 	})
 	e.GET("/gettest",getUser)
-	e.Logger.Fatal(e.Start(":80"))
+	e.Logger.Fatal(e.Start(":"+port))
 }
 
 func getUser(c echo.Context) error {
