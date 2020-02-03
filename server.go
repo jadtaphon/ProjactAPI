@@ -14,7 +14,7 @@ func main() {
 		return c.String(http.StatusOK, "Hello, World!")
 	})
 	e.GET("/gettest",getUser)
-	e.Logger.Fatal(e.Start(":80"))
+	e.Logger.Fatal(e.Start(":8080"))
 }
 
 func getUser(c echo.Context) error {
