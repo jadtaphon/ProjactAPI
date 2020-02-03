@@ -1,1 +1,1 @@
-web: bin/Heroku
+web:bin/Heroku
