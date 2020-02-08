@@ -15,6 +15,28 @@ import (
 
 )
 
+func (h *Handler) getALL(c echo.Context) (err error) {
+	db, err := mongo.NewClient(options.Client().ApplyURI(h.URL))
+	if err != nil {
+		log.Fatal(err)
+	}
+	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+	err = db.Connect(ctx)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer db.Disconnect(ctx)
+
+	qrury, err := db.Database("test").Collection("qr_api").Find(ctx, bson.M{})
+	var result []bson.M
+	if err = qrury.All(ctx, &result); err != nil {
+		log.Fatal(err)
+	}
+
+	return c.JSON(http.StatusOK, result)
+}
+
+//////////////////////////////////////////////////////////////////////////////////////
 func (h *Handler) getUser(c echo.Context) (err error) {
 	// users := []*DataQR{}
 
@@ -31,20 +53,22 @@ func (h *Handler) getUser(c echo.Context) (err error) {
 	defer db.Disconnect(ctx)
 
 	objID, _ := primitive.ObjectIDFromHex(id)
-	cursor, err := db.Database("test").Collection("qr_api").Find(ctx, bson.M{"_id": objID})
+	qrury, err := db.Database("test").Collection("qr_api").Find(ctx, bson.M{"key": objID})
 	if err != nil {
 		log.Fatal(err)
 	}
-	var qrury []bson.M
-	if err = cursor.All(ctx, &qrury); err != nil {
+	var result []bson.M
+	if err = qrury.All(ctx, &result); err != nil {
 		log.Fatal(err)
 	}
-	return c.JSON(http.StatusOK, qrury)
+	return c.JSON(http.StatusOK, result)
 }
 
+//////////////////////////////////////////////////////////////////////////////////////
 func (h *Handler) createqr(c echo.Context) (err error) {
 
-	status := c.FormValue("status")
+	id := primitive.NewObjectID()
+	//status := c.FormValue("status")
 	idcoure := c.FormValue("idcoure")
 
 	db, err := mongo.NewClient(options.Client().ApplyURI(h.URL))
@@ -59,13 +83,52 @@ func (h *Handler) createqr(c echo.Context) (err error) {
 	defer db.Disconnect(ctx)
 
 	update, err := db.Database("test").Collection("qr_api").InsertOne(ctx, bson.D{
-		{Key: "status", Value: status},
+		{Key: "key", Value: id},
 		{Key: "idcoure", Value: idcoure},
 	})
 
-	return c.JSON(http.StatusOK, update)
+	log.Println(update)
+
+	return c.JSON(http.StatusOK, id)
 }
 
+//////////////////////////////////////////////////////////////////////////////////////
+func (h *Handler) upadtestatus(c echo.Context) (err error) {
+
+	idcoure := c.FormValue("idcoure")
+	newKey := primitive.NewObjectID()
+	db, err := mongo.NewClient(options.Client().ApplyURI(h.URL))
+	if err != nil {
+		log.Fatal(err)
+	}
+	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+	err = db.Connect(ctx)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer db.Disconnect(ctx)
+
+	result, err := db.Database("test").Collection("qr_api").UpdateOne(
+		ctx,
+		bson.M{"idcoure": idcoure},
+		bson.D{
+			{"$set", bson.D{{"key", newKey}}},
+		},
+	)
+	if err != nil {
+		log.Fatal(err)
+	}
+	//log.Println(x)
+
+	// log.Println(idcoure)
+	// log.Printf("Updated %v Documents!\n", result.ModifiedCount)
+
+	return c.JSON(http.StatusOK, result.ModifiedCount)
+}
+
+//5e3ef573f12e89f890c4b248
+
+//////////////////////////////////////////////////////////////////////////////////////
 // func (u *Handler) checkkey(c echo.Context) (err error)  {
 // 	key:= c.Param("id")
 // 	keyqr, err := strconv.Atoi(key)

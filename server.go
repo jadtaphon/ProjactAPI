@@ -19,9 +19,14 @@ func main() {
 	e.GET("/", func(c echo.Context) error {
 		return c.String(http.StatusOK, "Hello, World!")
 	})
-	e.POST("/createqr", h.createqr)
-	// e.GET("check_key/:id", h.checkkey)
+
+	e.GET("/getALL", h.getALL)
 	e.GET("/gettest/:id", h.getUser)
+	e.POST("/create_qr", h.createqr)
+	e.POST("/update_status", h.upadtestatus)
+
+	// e.GET("check_key/:id", h.checkkey)
+
 	e.Logger.Fatal(e.Start(":" + port))
 }
 
