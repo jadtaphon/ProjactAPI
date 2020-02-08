@@ -39,9 +39,6 @@ func (h *Handler) getUser(c echo.Context) (err error) {
 	if err = cursor.All(ctx, &qrury); err != nil {
 		log.Fatal(err)
 	}
-	log.Println(id)
-
-	// defer db.Close()
 	return c.JSON(http.StatusOK, qrury)
 }
 
@@ -69,13 +66,13 @@ func (h *Handler) createqr(c echo.Context) (err error) {
 	return c.JSON(http.StatusOK, update)
 }
 
-// // func (u *Handler) checkkey(c echo.Context) (err error)  {
-// // 	key:= c.Param("id")
-// // 	keyqr, err := strconv.Atoi(key)
-// // 	// if u.Data.Key==keyqr {
-// // 	// 	return c.JSON(http.StatusOK, u.Status)
-// // 	// }
-// // 	log.Println(key)
-// // 	log.Println(keyqr)
-// // 		return c.JSON(http.StatusOK, u)
-// // }
+// func (u *Handler) checkkey(c echo.Context) (err error)  {
+// 	key:= c.Param("id")
+// 	keyqr, err := strconv.Atoi(key)
+// 	// if u.Data.Key==keyqr {
+// 	// 	return c.JSON(http.StatusOK, u.Status)
+// 	// }
+// 	log.Println(key)
+// 	log.Println(keyqr)
+// 		return c.JSON(http.StatusOK, u)
+// }

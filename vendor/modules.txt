@@ -11,7 +11,7 @@ github.com/mattn/go-isatty
 github.com/valyala/bytebufferpool
 # github.com/valyala/fasttemplate v1.1.0
 github.com/valyala/fasttemplate
-# golang.org/x/crypto v0.0.0-20200128174031-69ecbb4d6d5d
+# golang.org/x/crypto v0.0.0-20200208060501-ecb85df21340
 golang.org/x/crypto/acme
 golang.org/x/crypto/acme/autocert
 # golang.org/x/net v0.0.0-20200202094626-16171245cfb2
