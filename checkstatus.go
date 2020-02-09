@@ -32,6 +32,8 @@ func (h *Handler) getALL(c echo.Context) (err error) {
 	if err = qrury.All(ctx, &result); err != nil {
 		log.Fatal(err)
 	}
+	
+	log.Preintln(result)
 
 	return c.JSON(http.StatusOK, result)
 }
