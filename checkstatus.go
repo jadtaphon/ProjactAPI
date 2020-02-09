@@ -5,7 +5,6 @@ import (
 	"log"
 	"net/http"
 	"time"
-	
 
 	"github.com/labstack/echo/v4"
 	"go.mongodb.org/mongo-driver/bson"
@@ -33,12 +32,12 @@ func (h *Handler) getALL(c echo.Context) (err error) {
 	// }
 
 	qrury, err := db.Database("testAPL").Collection("qr_api").Find(ctx, bson.M{})
-	//var result []bson.M
-	//if err = qrury.All(ctx, &result); err != nil {
-	//	log.Fatal(err)
-	//}
+	var result []bson.M
+	if err = qrury.All(ctx, &result); err != nil {
+		log.Fatal(err)
+	}
 
-	return c.JSON(http.StatusOK, qrury)
+	return c.JSON(http.StatusOK, result)
 }
 
 //////////////////////////////////////////////////////////////////////////////////////
@@ -62,22 +61,19 @@ func (h *Handler) getUser(c echo.Context) (err error) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	//var result []bson.M
-	//if err = qrury.All(ctx, &result); err != nil {
-	//	log.Fatal(err)
-	//}
-	return c.JSON(http.StatusOK, qrury)
+	var result []bson.M
+	if err = qrury.All(ctx, &result); err != nil {
+		log.Fatal(err)
+	}
+	return c.JSON(http.StatusOK, result)
 }
 
 //////////////////////////////////////////////////////////////////////////////////////
 func (h *Handler) createqr(c echo.Context) (err error) {
 
 	id := primitive.NewObjectID()
-	log.Println(id)
-	
 	//status := c.FormValue("status")
 	idcoure := c.FormValue("idcoure")
-	log.Println(idcoure)
 
 	db, err := mongo.NewClient(options.Client().ApplyURI(h.URL))
 	if err != nil {
