@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"time"
+	"byte"
 
 	"github.com/labstack/echo/v4"
 	"go.mongodb.org/mongo-driver/bson"
@@ -32,7 +33,7 @@ func (h *Handler) getALL(c echo.Context) (err error) {
 	// }
 
 	qrury, err := db.Database("testAPL").Collection("qr_api").Find(ctx, bson.M{})
-	var result []bson.M
+	var result []byte
 	if err = qrury.All(ctx, &result); err != nil {
 		log.Fatal(err)
 	}
@@ -61,7 +62,7 @@ func (h *Handler) getUser(c echo.Context) (err error) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	var result []bson.M
+	var result []byte
 	if err = qrury.All(ctx, &result); err != nil {
 		log.Fatal(err)
 	}
