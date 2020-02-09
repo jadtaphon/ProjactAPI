@@ -33,7 +33,7 @@ func (h *Handler) getALL(c echo.Context) (err error) {
 		log.Fatal(err)
 	}
 	
-	log.Preintln(result)
+	log.Println(result)
 
 	return c.JSON(http.StatusOK, result)
 }
