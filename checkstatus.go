@@ -26,15 +26,16 @@ func (h *Handler) getALL(c echo.Context) (err error) {
 		log.Fatal(err)
 	}
 	defer db.Disconnect(ctx)
+	// err = client.Ping(ctx, readpref.Primary())
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
 
-	qrury, err := db.Database("test").Collection("qr_api").Find(ctx, bson.M{})
+	qrury, err := db.Database("testAPL").Collection("qr_api").Find(ctx, bson.M{})
 	var result []bson.M
 	if err = qrury.All(ctx, &result); err != nil {
 		log.Fatal(err)
 	}
-	
-	log.Println(result)
-	
 
 	return c.JSON(http.StatusOK, result)
 }
@@ -56,7 +57,7 @@ func (h *Handler) getUser(c echo.Context) (err error) {
 	defer db.Disconnect(ctx)
 
 	objID, _ := primitive.ObjectIDFromHex(id)
-	qrury, err := db.Database("test").Collection("qr_api").Find(ctx, bson.M{"key": objID})
+	qrury, err := db.Database("testAPL").Collection("qr_api").Find(ctx, bson.M{"key": objID})
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -85,7 +86,7 @@ func (h *Handler) createqr(c echo.Context) (err error) {
 	}
 	defer db.Disconnect(ctx)
 
-	update, err := db.Database("test").Collection("qr_api").InsertOne(ctx, bson.D{
+	update, err := db.Database("testAPL").Collection("qr_api").InsertOne(ctx, bson.D{
 		{Key: "key", Value: id},
 		{Key: "idcoure", Value: idcoure},
 	})
@@ -111,7 +112,7 @@ func (h *Handler) upadtestatus(c echo.Context) (err error) {
 	}
 	defer db.Disconnect(ctx)
 
-	result, err := db.Database("test").Collection("qr_api").UpdateOne(
+	result, err := db.Database("testAPL").Collection("qr_api").UpdateOne(
 		ctx,
 		bson.M{"idcoure": idcoure},
 		bson.D{
