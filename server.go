@@ -13,7 +13,7 @@ func main() {
 	port := os.Getenv("PORT")
 	e := echo.New()
 
-	url := "mongodb+srv://jadtaphon:hbrY7322@cluster0-vkyg7.mongodb.net/test?retryWrites=true&w=majority"
+	url := "mongodb+srv://Projectapi:hbrY7322@cluster0-1jlt9.mongodb.net/test?retryWrites=true&w=majority"
 
 	h := &Handler{URL: url}
 	e.GET("/", func(c echo.Context) error {
