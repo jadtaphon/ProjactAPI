@@ -73,8 +73,11 @@ func (h *Handler) getUser(c echo.Context) (err error) {
 func (h *Handler) createqr(c echo.Context) (err error) {
 
 	id := primitive.NewObjectID()
+	log.Println(id)
+	
 	//status := c.FormValue("status")
 	idcoure := c.FormValue("idcoure")
+	log.Println(idcoure)
 
 	db, err := mongo.NewClient(options.Client().ApplyURI(h.URL))
 	if err != nil {
