@@ -33,12 +33,12 @@ func (h *Handler) getALL(c echo.Context) (err error) {
 	// }
 
 	qrury, err := db.Database("testAPL").Collection("qr_api").Find(ctx, bson.M{})
-	var result []byte
-	if err = qrury.All(ctx, &result); err != nil {
-		log.Fatal(err)
-	}
+	//var result []bson.M
+	//if err = qrury.All(ctx, &result); err != nil {
+	//	log.Fatal(err)
+	//}
 
-	return c.JSON(http.StatusOK, result)
+	return c.JSON(http.StatusOK, qrury)
 }
 
 //////////////////////////////////////////////////////////////////////////////////////
@@ -62,11 +62,11 @@ func (h *Handler) getUser(c echo.Context) (err error) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	var result []byte
-	if err = qrury.All(ctx, &result); err != nil {
-		log.Fatal(err)
-	}
-	return c.JSON(http.StatusOK, result)
+	//var result []bson.M
+	//if err = qrury.All(ctx, &result); err != nil {
+	//	log.Fatal(err)
+	//}
+	return c.JSON(http.StatusOK, qrury)
 }
 
 //////////////////////////////////////////////////////////////////////////////////////
