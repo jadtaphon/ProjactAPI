@@ -35,7 +35,7 @@ func (h *Handler) getALL(c echo.Context) (err error) {
 	
 	log.Println(result)
 
-	return c.JSON(http.StatusOK, result)
+	return c.String(http.StatusOK, result)
 }
 
 //////////////////////////////////////////////////////////////////////////////////////
@@ -63,7 +63,7 @@ func (h *Handler) getUser(c echo.Context) (err error) {
 	if err = qrury.All(ctx, &result); err != nil {
 		log.Fatal(err)
 	}
-	return c.JSON(http.StatusOK, result)
+	return c.String(http.StatusOK, result)
 }
 
 //////////////////////////////////////////////////////////////////////////////////////
@@ -91,7 +91,7 @@ func (h *Handler) createqr(c echo.Context) (err error) {
 
 	log.Println(update)
 
-	return c.JSON(http.StatusOK, id)
+	return c.String(http.StatusOK, id)
 }
 
 //////////////////////////////////////////////////////////////////////////////////////
@@ -125,7 +125,7 @@ func (h *Handler) upadtestatus(c echo.Context) (err error) {
 	// log.Println(idcoure)
 	// log.Printf("Updated %v Documents!\n", result.ModifiedCount)
 
-	return c.JSON(http.StatusOK, result.ModifiedCount)
+	return c.String(http.StatusOK, result.ModifiedCount)
 }
 
 //5e3ef573f12e89f890c4b248
