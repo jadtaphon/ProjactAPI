@@ -34,6 +34,7 @@ func (h *Handler) getALL(c echo.Context) (err error) {
 	}
 	
 	log.Println(result)
+	
 
 	return c.JSON(http.StatusOK, result)
 }
