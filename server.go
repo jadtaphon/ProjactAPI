@@ -13,16 +13,16 @@ func main() {
 	port := os.Getenv("PORT")
 	e := echo.New()
 
-	//url := "mongodb+srv://Projectapi:hbrY7322@cluster0-1jlt9.mongodb.net/test?retryWrites=true&w=majority"
-	//h := &Handler{URL: url}
+	url := "mongodb+srv://Projectapi:hbrY7322@cluster0-1jlt9.mongodb.net/test?retryWrites=true&w=majority"
+	h := &Handler{URL: url}
 	e.GET("/", func(c echo.Context) error {
 		return c.String(http.StatusOK, "Hello, World!")
 	})
 
-	// e.GET("/getALL", h.getALL)
-	// e.GET("/gettest/:id", h.getUser)
-	// e.POST("/create_qr", h.createqr)
-	// e.POST("/update_status", h.upadtestatus)
+	 e.GET("/getALL", h.getALL)
+	 e.GET("/gettest/:id", h.getUser)
+	 e.POST("/create_qr", h.createqr)
+	 e.POST("/update_status", h.upadtestatus)
 
 	// e.GET("check_key/:id", h.checkkey)
 
