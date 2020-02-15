@@ -116,7 +116,7 @@ func (h *Handler) upadtestatus(c echo.Context) (err error) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	//log.Println(x)
+	log.Println(result)
 
 	// log.Println(idcoure)
 	// log.Printf("Updated %v Documents!\n", result.ModifiedCount)
