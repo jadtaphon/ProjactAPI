@@ -33,9 +33,9 @@ func (h *Handler) getALL(c echo.Context) (err error) {
 // 		log.Fatal(err)
 // 	}
 	log.Println(h.URL)
-	result:="jadtaphon"
+	//result:="jadtaphon"
 
-	return c.JSON(http.StatusOK, result)
+	return c.JSON(http.StatusOK, h.URL)
 }
 
 //////////////////////////////////////////////////////////////////////////////////////
