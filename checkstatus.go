@@ -16,22 +16,24 @@ import (
 )
 
 func (h *Handler) getALL(c echo.Context) (err error) {
-	db, err := mongo.NewClient(options.Client().ApplyURI(h.URL))
-	if err != nil {
-		log.Fatal(err)
-	}
-	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
-	err = db.Connect(ctx)
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer db.Disconnect(ctx)
+// 	db, err := mongo.NewClient(options.Client().ApplyURI(h.URL))
+// 	if err != nil {
+// 		log.Fatal(err)
+// 	}
+// 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+// 	err = db.Connect(ctx)
+// 	if err != nil {
+// 		log.Fatal(err)
+// 	}
+// 	defer db.Disconnect(ctx)
 
-	qrury, err := db.Database("testAPL").Collection("qr_api").Find(ctx, bson.M{})
-	var result []bson.M
-	if err = qrury.All(ctx, &result); err != nil {
-		log.Fatal(err)
-	}
+// 	qrury, err := db.Database("testAPL").Collection("qr_api").Find(ctx, bson.M{})
+// 	var result []bson.M
+// 	if err = qrury.All(ctx, &result); err != nil {
+// 		log.Fatal(err)
+// 	}
+	log.Println(h.URL)
+	result:="jadtaphon"
 
 	return c.JSON(http.StatusOK, result)
 }
