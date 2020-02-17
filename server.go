@@ -19,7 +19,7 @@ func main() {
 		return c.String(http.StatusOK, "Hello, World!")
 	})
 
-	e.GET("/getALL", h.getALL)
+	e.GET("/getall", h.getALL)
 	e.GET("/getKey/:id", h.getUser)
 	e.POST("/create_qr", h.createqr)
 	e.POST("/update_status", h.upadtestatus)
