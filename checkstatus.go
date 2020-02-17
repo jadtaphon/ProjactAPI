@@ -28,14 +28,12 @@ func (h *Handler) getALL(c echo.Context) (err error) {
 	defer db.Disconnect(ctx)
 
 	qrury, err := db.Database("testAPL").Collection("qr_api").Find(ctx, bson.M{})
-// 	var result []bson.M
-// 	if err = qrury.All(ctx, &result); err != nil {
-// 		log.Fatal(err)
-// 	}
-	log.Println(h.URL)
-	//result:="jadtaphon"
+	var result []bson.M
+	if err = qrury.All(ctx, &result); err != nil {
+		log.Fatal(err)
+	}
 
-	return c.JSON(http.StatusOK, qrury)
+	return c.JSON(http.StatusOK, result)
 }
 
 //////////////////////////////////////////////////////////////////////////////////////
