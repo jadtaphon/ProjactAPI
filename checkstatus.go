@@ -20,19 +20,19 @@ func (h *Handler) getALL(c echo.Context) (err error) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	ctx, _ := context.WithTimeout(context.Background(), 15*time.Second)
+	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
 	err = db.Connect(ctx)
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer db.Disconnect(ctx)
+	
 
 	qrury, err := db.Database("testAPL").Collection("qr_api").Find(ctx, bson.M{})
 	var result []bson.M
 	if err = qrury.All(ctx, &result); err != nil {
 		log.Fatal(err)
 	}
-
+	defer db.Disconnect(ctx)
 	return c.JSON(http.StatusOK, result)
 }
 
