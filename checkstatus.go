@@ -20,7 +20,7 @@ func (h *Handler) getALL(c echo.Context) (err error) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	ctx, _ := context.WithTimeout(context.Background(), 25*time.Second)
+	ctx, _ := context.WithTimeout(context.Background(), 27*time.Second)
 	err = db.Connect(ctx)
 	if err != nil {
 		log.Fatal(err)
