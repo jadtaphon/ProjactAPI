@@ -4,8 +4,8 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/labstack/echo/middleware"
 	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 	"gopkg.in/mgo.v2"
 
 )
