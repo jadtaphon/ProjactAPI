@@ -11,9 +11,10 @@ import (
 func main() {
 
 	port := os.Getenv("PORT")
+	uri := os.Getenv("MONGODB_URI")
 
 	e := echo.New()
-	db, err := mgo.Dial("localhost")
+	db, err := mgo.Dial(uri)
 	if err != nil {
 		e.Logger.Fatal(err)
 	}
