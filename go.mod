@@ -3,6 +3,7 @@ module ProjactAPI
 go 1.13
 
 require (
+	github.com/labstack/echo v3.3.10+incompatible
 	github.com/labstack/echo/v4 v4.1.14
 	github.com/mattn/go-isatty v0.0.12 // indirect
 	go.mongodb.org/mongo-driver v1.3.0 // indirect
