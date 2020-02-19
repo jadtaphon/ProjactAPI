@@ -1,13 +1,14 @@
 package main
 
 import (
-	"gopkg.in/mgo.v2"
+//"gopkg.in/mgo.v2"
+//"go.mongodb.org/mongo-driver/mongo"
 
 )
 
 type (
 	Handler struct {
-		DB *mgo.Session
+		URL string `json:"url`
 	}
 )
 
