@@ -11,7 +11,6 @@ import (
 func main() {
 
 	port := os.Getenv("PORT")
-	e := echo.New()
 
 	e := echo.New()
 	db, err := mgo.Dial("localhost")
