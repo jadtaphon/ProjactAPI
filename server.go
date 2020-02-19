@@ -11,12 +11,12 @@ import (
 )
 
 func main() {
-
+	e := echo.New()
 	port := os.Getenv("PORT")
 	uri := os.Getenv("MONGODB_URI")
 
-	e := echo.New()
-
+	e.Use(middleware.Logger())
+	e.Use(middleware.Recover())
 	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
 		AllowOrigins: []string{"http://localhost:80"},
 		AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
