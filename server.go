@@ -13,10 +13,10 @@ import (
 func main() {
 
 	port := os.Getenv("PORT")
-	//uri := os.Getenv("MONGOLAB_URL")
+	uri := os.Getenv("mongodb://heroku_4v7cvj1l:1uvhbepo2nqnspk8l2jsmpvugf@ds043942.mlab.com:43942/heroku_4v7cvj1l")
 
 	e := echo.New()
-	db, err := mgo.Dial("localhost")
+	db, err := mgo.Dial(uri)
 	if err != nil {
 		e.Logger.Fatal(err)
 	}
