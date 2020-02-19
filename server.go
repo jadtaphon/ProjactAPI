@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/labstack/echo/middleware"
 	"github.com/labstack/echo/v4"
 	"gopkg.in/mgo.v2"
 
@@ -15,6 +16,10 @@ func main() {
 	uri := os.Getenv("MONGODB_URI")
 
 	e := echo.New()
+	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+		AllowOrigins: []string{"*"},
+		AllowMethods: []string{http.MethodGet, http.MethodPut, http.MethodPost, http.MethodDelete},
+	}))
 	db, err := mgo.Dial(uri)
 	if err != nil {
 		e.Logger.Fatal(err)
