@@ -11,5 +11,6 @@ type (
 		CourseID  string        `json:"course_id" bson:"course_id"`
 		CourseKEY string        `json:"course_key" bson:"course_key"`
 		Key       bson.ObjectId `json:"key" bson:"key"`
+		Url       string        `json:"url" bson:"url"`
 	}
 )
