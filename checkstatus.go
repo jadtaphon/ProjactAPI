@@ -66,12 +66,13 @@ func (h *Handler) updatekey(c echo.Context) (err error) {
 
 	courseid := c.FormValue("courseid")
 	coursekey := c.FormValue("coursekey")
+	urls := c.FormValue("url")
 
 	db := h.DB.Clone()
 	defer db.Close()
 
 	query := bson.M{"course_id": courseid}
-	update := bson.M{"$set": bson.M{"course_key": coursekey, "key": bson.ObjectId(key)}}
+	update := bson.M{"$set": bson.M{"course_key": coursekey, "key": bson.ObjectId(key), "url": urls}}
 
 	if err = db.DB("heroku_4v7cvj1l").C("qr_api").Update(query, update); err != nil {
 		return c.JSON(http.StatusBadRequest, err.Error())
