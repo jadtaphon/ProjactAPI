@@ -11,7 +11,7 @@ import (
 
 //////////////////////////////////////////////////////////////////////////////////////////
 func (h *Handler) getUser(c echo.Context) (err error) {
-	users := *DataQR{}
+	users := DataQR{}
 	db := h.DB.Clone()
 
 	if err = db.DB("heroku_4v7cvj1l").C("qr_api").Find(nil).All(&users); err != nil {
@@ -24,7 +24,7 @@ func (h *Handler) getUser(c echo.Context) (err error) {
 //////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////getKey///////////////////////////////////////////////////////////
 func (h *Handler) getKey(c echo.Context) (err error) {
-	users := *DataQR{}
+	users := DataQR{}
 	db := h.DB.Clone()
 	defer db.Close()
 
