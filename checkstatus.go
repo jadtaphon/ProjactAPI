@@ -1,7 +1,7 @@
 package main
 
 import (
-	"log"
+	//"log"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
@@ -11,7 +11,7 @@ import (
 
 //////////////////////////////////////////////////////////////////////////////////////////
 func (h *Handler) getUser(c echo.Context) (err error) {
-	users := DataQR{}
+	users := []*DataQR{}
 	db := h.DB.Clone()
 
 	if err = db.DB("heroku_4v7cvj1l").C("qr_api").Find(nil).All(&users); err != nil {
@@ -24,7 +24,7 @@ func (h *Handler) getUser(c echo.Context) (err error) {
 //////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////getKey///////////////////////////////////////////////////////////
 func (h *Handler) getKey(c echo.Context) (err error) {
-	users := DataQR{}
+	users := []*DataQR{}
 	db := h.DB.Clone()
 	defer db.Close()
 
@@ -33,7 +33,7 @@ func (h *Handler) getKey(c echo.Context) (err error) {
 	if err = db.DB("heroku_4v7cvj1l").C("qr_api").Find(bson.M{"key": bson.ObjectIdHex(id)}).All(&users); err != nil {
 		return c.JSON(http.StatusBadRequest, err)
 	}
-	log.Println(users.Url)
+	//log.Println(users.Url)
 	return c.JSON(http.StatusOK, users)
 	//return c.Redirect(http.StatusMovedPermanently, users.Url)
 }
