@@ -33,7 +33,7 @@ func (h *Handler) getKey(c echo.Context) (err error) {
 		return c.JSON(http.StatusBadRequest, err)
 	}
 
-	return c.JSON(http.StatusOK, users.url)
+	return c.JSON(http.StatusOK, users.Url)
 	//return c.Redirect(http.StatusMovedPermanently, users.url)
 }
 
