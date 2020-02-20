@@ -24,17 +24,21 @@ func (h *Handler) getUser(c echo.Context) (err error) {
 ////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////getKey///////////////////////////////////////////////////////////
 func (h *Handler) getKey(c echo.Context) (err error) {
-	users := []*DataQR{}
+	users := new(DataQR)
+	if err = c.Bind(users); err != nil {
+		return
+	}
+
 	db := h.DB.Clone()
 	defer db.Close()
 
 	id := c.Param("id")
 
-	if err = db.DB("heroku_4v7cvj1l").C("qr_api").Find(bson.M{"key": bson.ObjectIdHex(id)}).All(&users); err != nil {
+	if err = db.DB("heroku_4v7cvj1l").C("qr_api").Find(bson.M{"key": bson.ObjectIdHex(id)}).One(&users); err != nil {
 		return c.JSON(http.StatusBadRequest, err)
 	}
 	//log.Println(users.Url)
-	return c.JSON(http.StatusOK, users)
+	return c.JSON(http.StatusOK, users.Url)
 	//return c.Redirect(http.StatusMovedPermanently, users.Url)
 }
 
