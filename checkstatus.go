@@ -32,8 +32,8 @@ func (h *Handler) getKey(c echo.Context) (err error) {
 	if err = db.DB("heroku_4v7cvj1l").C("qr_api").Find(bson.M{"key": bson.ObjectIdHex(id)}).All(&users); err != nil {
 		return c.JSON(http.StatusBadRequest, err)
 	}
-
-	return c.JSON(http.StatusOK, &users.Url)
+	log.Println(users.Url)
+	return c.JSON(http.StatusOK, users)
 	//return c.Redirect(http.StatusMovedPermanently, users.Url)
 }
 
