@@ -30,7 +30,7 @@ func main() {
 	h := &Handler{DB: db}
 
 	e.GET("/", func(c echo.Context) error {
-		return c.String(http.StatusOK, "Hello, World!")
+		return c.HTML(http.StatusOK, "<div style='text-align: center;'><h1>หมดเวลา สแกน</h1></div>")
 	})
 	e.GET("/getAll", h.getUser)
 	e.GET("/getKey/:id", h.getKey)
