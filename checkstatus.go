@@ -34,7 +34,7 @@ func (h *Handler) getKey(c echo.Context) (err error) {
 
 	id := c.Param("id")
 
-	if err = db.DB("heroku_4v7cvj1l").C("qr_api").Find(bson.M{"key": bson.ObjectIdHex(id)}).One(&users); err != nil {
+	if err = db.DB("heroku_4v7cvj1l").C("qr_api").Find(bson.M{"_id": bson.ObjectIdHex(id)}).One(&users); err != nil {
 		return c.JSON(http.StatusBadRequest, err)
 	}
 	//log.Println(users.Url)
@@ -46,7 +46,7 @@ func (h *Handler) getKey(c echo.Context) (err error) {
 //////////////////////////////createqr////////////////////////////////////////////////////////////
 func (h *Handler) createqr(c echo.Context) (err error) {
 
-	user := &DataQR{ID: bson.NewObjectId(), Key: bson.NewObjectId()}
+	user := &DataQR{ID: bson.NewObjectId()}
 	err = c.Bind(user)
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, err.Error())
@@ -66,8 +66,6 @@ func (h *Handler) createqr(c echo.Context) (err error) {
 func (h *Handler) updatekey(c echo.Context) (err error) {
 	//users := []*DataQR{}
 
-	key := bson.NewObjectId()
-
 	courseid := c.FormValue("courseid")
 	coursekey := c.FormValue("coursekey")
 	urls := c.FormValue("url")
@@ -76,7 +74,7 @@ func (h *Handler) updatekey(c echo.Context) (err error) {
 	defer db.Close()
 
 	query := bson.M{"course_id": courseid}
-	update := bson.M{"$set": bson.M{"course_key": coursekey, "key": bson.ObjectId(key), "url": urls}}
+	update := bson.M{"$set": bson.M{"course_key": coursekey, "url": urls}}
 
 	if err = db.DB("heroku_4v7cvj1l").C("qr_api").Update(query, update); err != nil {
 		return c.JSON(http.StatusBadRequest, err.Error())
