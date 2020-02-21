@@ -83,5 +83,5 @@ func (h *Handler) updatekey(c echo.Context) (err error) {
 		return c.JSON(http.StatusBadRequest, err.Error())
 	}
 
-	return c.JSON(http.StatusOK, users.ID)
+	return c.JSON(http.StatusOK, users)
 }
