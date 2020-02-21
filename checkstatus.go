@@ -65,10 +65,10 @@ func (h *Handler) createqr(c echo.Context) (err error) {
 /////////////////////////////updatekey/////////////////////////////////////////////////////////////
 func (h *Handler) updatekey(c echo.Context) (err error) {
 	//users := []*DataQR{}
-	users := new(DataQR)
-	if err = c.Bind(users); err != nil {
-		return
-	}
+	// users := new(DataQR)
+	// if err = c.Bind(users); err != nil {
+	// 	return
+	// }
 	courseid := c.FormValue("courseid")
 	coursekey := c.FormValue("coursekey")
 	urls := c.FormValue("url")
