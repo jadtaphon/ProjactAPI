@@ -69,6 +69,7 @@ func (h *Handler) updatekey(c echo.Context) (err error) {
 	if err = c.Bind(users); err != nil {
 		return
 	}
+	id := bson.NewObjectId()
 	courseid := c.FormValue("courseid")
 	coursekey := c.FormValue("coursekey")
 	urls := c.FormValue("url")
@@ -77,11 +78,11 @@ func (h *Handler) updatekey(c echo.Context) (err error) {
 	defer db.Close()
 
 	query := bson.M{"course_id": courseid}
-	update := bson.M{"$set": bson.M{"course_key": coursekey, "url": urls}}
+	update := bson.M{"$set": bson.M{"id": bson.ObjectId(id), "course_key": coursekey, "url": urls}}
 
 	if err = db.DB("heroku_4v7cvj1l").C("qr_api").Update(query, update); err != nil {
 		return c.JSON(http.StatusBadRequest, err.Error())
 	}
 
-	return c.JSON(http.StatusOK, users.ID)
+	return c.JSON(http.StatusOK, id)
 }
