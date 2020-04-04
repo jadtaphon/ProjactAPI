@@ -30,10 +30,10 @@ func main() {
 	h := &Handler{DB: db}
 
 	e.GET("/", func(c echo.Context) error {
-		return c.HTML(http.StatusOK, "<div style='text-align: center;'><h1>หมดเวลา สแกน</h1></div>")
+		return c.HTML(http.StatusOK, "<div style='text-align: center; font-size: 5em;'><h1>หมดเวลา สแกน</h1></div>")
 	})
 	e.GET("/success", func(c echo.Context) error {
-		return c.HTML(http.StatusOK, "<div style='text-align: center;'><h1>เช็คชื่อสำเร็จ</h1></div>")
+		return c.HTML(http.StatusOK, "<div style='text-align: center; font-size: 5em;'><h1>เช็คชื่อสำเร็จ</h1></div>")
 	})
 	e.GET("/getAll", h.getUser)
 	e.GET("/getKey/:id", h.getKey)
